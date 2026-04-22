@@ -1,5 +1,7 @@
 <a href="https://github.com/minisbett/osu-server-launcher"><img width=128 height=128 align="right" src="https://minisbett.github.io/ultimate-osu-server-switcher/images/icon.png"></a>
 
+just QoL changes.
+
 ## osu! Server Launcher DEPRECATED
 This is the follow-up to the Ultimate osu! Server Switcher but updated to the new devserver connection method.
 

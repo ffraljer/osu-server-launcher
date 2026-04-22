@@ -60,8 +60,11 @@ namespace OsuServerLauncher.Helpers
       return null;
     }
 
-    public static string GetOsuPath()
+    public static string GetOsuPath(Data data)
     {
+      if (data.AlternativeOsuPath != "" && File.Exists(Path.Combine(data.AlternativeOsuPath, "osu!.exe")))
+        return data.AlternativeOsuPath;
+      
       if (File.Exists(Path.Combine(Environment.GetEnvironmentVariable("localappdata"), "osu!", "osu!.exe")))
         return Path.Combine(Environment.GetEnvironmentVariable("localappdata"), "osu!");
 

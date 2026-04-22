@@ -27,143 +27,140 @@ namespace OsuServerLauncher.Controls
     /// Required method for Designer support - do not modify
     /// the contents of this method with the code editor.
     /// </summary>
-    private void InitializeComponent()
-    {
-      this.label1 = new System.Windows.Forms.Label();
-      this.btnExit = new System.Windows.Forms.Button();
-      this.label2 = new System.Windows.Forms.Label();
-      this.txtUsername = new System.Windows.Forms.TextBox();
-      this.txtPassword = new System.Windows.Forms.TextBox();
-      this.label5 = new System.Windows.Forms.Label();
-      this.btnAddCredentials = new System.Windows.Forms.Button();
-      this.SuspendLayout();
+    private void InitializeComponent() {
+      label1 = new System.Windows.Forms.Label();
+      btnExit = new System.Windows.Forms.Button();
+      label2 = new System.Windows.Forms.Label();
+      txtUsername = new System.Windows.Forms.TextBox();
+      txtPassword = new System.Windows.Forms.TextBox();
+      label5 = new System.Windows.Forms.Label();
+      btnAddCredentials = new System.Windows.Forms.Button();
+      SuspendLayout();
       // 
       // label1
       // 
-      this.label1.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-      this.label1.ForeColor = System.Drawing.Color.White;
-      this.label1.Location = new System.Drawing.Point(12, 12);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(169, 35);
-      this.label1.TabIndex = 5;
-      this.label1.Text = "Add Credentials";
-      this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormDraggable);
+      label1.Font = new System.Drawing.Font("Segoe UI Semilight", 15.75F);
+      label1.ForeColor = System.Drawing.Color.White;
+      label1.Location = new System.Drawing.Point(12, 11);
+      label1.Name = "label1";
+      label1.Size = new System.Drawing.Size(169, 33);
+      label1.TabIndex = 5;
+      label1.Text = "Add Credentials";
+      label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      label1.MouseDown += FormDraggable;
       // 
       // btnExit
       // 
-      this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
-      this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
-      this.btnExit.FlatAppearance.BorderSize = 2;
-      this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
-      this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnExit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.btnExit.ForeColor = System.Drawing.Color.White;
-      this.btnExit.Location = new System.Drawing.Point(215, 12);
-      this.btnExit.Name = "btnExit";
-      this.btnExit.Size = new System.Drawing.Size(35, 35);
-      this.btnExit.TabIndex = 6;
-      this.btnExit.TabStop = false;
-      this.btnExit.Text = "X";
-      this.btnExit.UseVisualStyleBackColor = false;
-      this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+      btnExit.BackColor = System.Drawing.Color.FromArgb(((int)((byte)30)), ((int)((byte)30)), ((int)((byte)46)));
+      btnExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)((byte)43)), ((int)((byte)43)), ((int)((byte)43)));
+      btnExit.FlatAppearance.BorderSize = 2;
+      btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)((byte)220)), ((int)((byte)53)), ((int)((byte)69)));
+      btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      btnExit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+      btnExit.ForeColor = System.Drawing.Color.White;
+      btnExit.Location = new System.Drawing.Point(215, 11);
+      btnExit.Name = "btnExit";
+      btnExit.Size = new System.Drawing.Size(35, 33);
+      btnExit.TabIndex = 6;
+      btnExit.TabStop = false;
+      btnExit.Text = "X";
+      btnExit.UseVisualStyleBackColor = false;
+      btnExit.Click += btnExit_Click;
       // 
       // label2
       // 
-      this.label2.AutoSize = true;
-      this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-      this.label2.Location = new System.Drawing.Point(9, 58);
-      this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(67, 17);
-      this.label2.TabIndex = 7;
-      this.label2.Text = "Username";
-      this.label2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormDraggable);
+      label2.AutoSize = true;
+      label2.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+      label2.Location = new System.Drawing.Point(9, 54);
+      label2.Name = "label2";
+      label2.Size = new System.Drawing.Size(71, 15);
+      label2.TabIndex = 7;
+      label2.Text = "Username";
+      label2.MouseDown += FormDraggable;
       // 
       // txtUsername
       // 
-      this.txtUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
-      this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-      this.txtUsername.ForeColor = System.Drawing.Color.White;
-      this.txtUsername.Location = new System.Drawing.Point(82, 56);
-      this.txtUsername.MaxLength = 32;
-      this.txtUsername.Name = "txtUsername";
-      this.txtUsername.Size = new System.Drawing.Size(168, 25);
-      this.txtUsername.TabIndex = 0;
-      this.txtUsername.TextChanged += new System.EventHandler(this.txt_TextChanged);
-      this.txtUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+      txtUsername.BackColor = System.Drawing.Color.FromArgb(((int)((byte)30)), ((int)((byte)30)), ((int)((byte)46)));
+      txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      txtUsername.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+      txtUsername.ForeColor = System.Drawing.Color.White;
+      txtUsername.Location = new System.Drawing.Point(82, 52);
+      txtUsername.MaxLength = 32;
+      txtUsername.Name = "txtUsername";
+      txtUsername.Size = new System.Drawing.Size(168, 25);
+      txtUsername.TabIndex = 0;
+      txtUsername.TextChanged += txt_TextChanged;
+      txtUsername.KeyDown += txt_KeyDown;
       // 
       // txtPassword
       // 
-      this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
-      this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-      this.txtPassword.ForeColor = System.Drawing.Color.White;
-      this.txtPassword.Location = new System.Drawing.Point(82, 87);
-      this.txtPassword.MaxLength = 64;
-      this.txtPassword.Name = "txtPassword";
-      this.txtPassword.Size = new System.Drawing.Size(168, 25);
-      this.txtPassword.TabIndex = 1;
-      this.txtPassword.UseSystemPasswordChar = true;
-      this.txtPassword.TextChanged += new System.EventHandler(this.txt_TextChanged);
-      this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_KeyDown);
+      txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)((byte)30)), ((int)((byte)30)), ((int)((byte)46)));
+      txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      txtPassword.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+      txtPassword.ForeColor = System.Drawing.Color.White;
+      txtPassword.Location = new System.Drawing.Point(82, 81);
+      txtPassword.MaxLength = 64;
+      txtPassword.Name = "txtPassword";
+      txtPassword.Size = new System.Drawing.Size(168, 25);
+      txtPassword.TabIndex = 1;
+      txtPassword.UseSystemPasswordChar = true;
+      txtPassword.TextChanged += txt_TextChanged;
+      txtPassword.KeyDown += txt_KeyDown;
       // 
       // label5
       // 
-      this.label5.AutoSize = true;
-      this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-      this.label5.Location = new System.Drawing.Point(12, 89);
-      this.label5.Name = "label5";
-      this.label5.Size = new System.Drawing.Size(64, 17);
-      this.label5.TabIndex = 10;
-      this.label5.Text = "Password";
-      this.label5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormDraggable);
+      label5.AutoSize = true;
+      label5.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+      label5.Location = new System.Drawing.Point(9, 83);
+      label5.Name = "label5";
+      label5.Size = new System.Drawing.Size(71, 15);
+      label5.TabIndex = 10;
+      label5.Text = "Password";
+      label5.MouseDown += FormDraggable;
       // 
       // btnAddCredentials
       // 
-      this.btnAddCredentials.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(31)))), ((int)(((byte)(31)))));
-      this.btnAddCredentials.Enabled = false;
-      this.btnAddCredentials.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
-      this.btnAddCredentials.FlatAppearance.BorderSize = 2;
-      this.btnAddCredentials.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
-      this.btnAddCredentials.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-      this.btnAddCredentials.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnAddCredentials.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-      this.btnAddCredentials.ForeColor = System.Drawing.Color.White;
-      this.btnAddCredentials.Location = new System.Drawing.Point(13, 118);
-      this.btnAddCredentials.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-      this.btnAddCredentials.Name = "btnAddCredentials";
-      this.btnAddCredentials.Size = new System.Drawing.Size(237, 35);
-      this.btnAddCredentials.TabIndex = 2;
-      this.btnAddCredentials.TabStop = false;
-      this.btnAddCredentials.Text = "Add Credentials";
-      this.btnAddCredentials.UseVisualStyleBackColor = false;
-      this.btnAddCredentials.Click += new System.EventHandler(this.btnAddServer_Click);
+      btnAddCredentials.BackColor = System.Drawing.Color.FromArgb(((int)((byte)30)), ((int)((byte)30)), ((int)((byte)46)));
+      btnAddCredentials.Enabled = false;
+      btnAddCredentials.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)((byte)43)), ((int)((byte)43)), ((int)((byte)43)));
+      btnAddCredentials.FlatAppearance.BorderSize = 2;
+      btnAddCredentials.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)((byte)43)), ((int)((byte)43)), ((int)((byte)43)));
+      btnAddCredentials.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)((byte)38)), ((int)((byte)38)), ((int)((byte)38)));
+      btnAddCredentials.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      btnAddCredentials.Font = new System.Drawing.Font("Segoe UI", 12F);
+      btnAddCredentials.ForeColor = System.Drawing.Color.White;
+      btnAddCredentials.Location = new System.Drawing.Point(13, 112);
+      btnAddCredentials.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+      btnAddCredentials.Name = "btnAddCredentials";
+      btnAddCredentials.Size = new System.Drawing.Size(237, 31);
+      btnAddCredentials.TabIndex = 2;
+      btnAddCredentials.TabStop = false;
+      btnAddCredentials.Text = "Add Credentials";
+      btnAddCredentials.UseVisualStyleBackColor = false;
+      btnAddCredentials.Click += btnAddServer_Click;
       // 
       // AddCredentials
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-      this.ClientSize = new System.Drawing.Size(264, 165);
-      this.Controls.Add(this.btnAddCredentials);
-      this.Controls.Add(this.txtPassword);
-      this.Controls.Add(this.label5);
-      this.Controls.Add(this.txtUsername);
-      this.Controls.Add(this.label2);
-      this.Controls.Add(this.btnExit);
-      this.Controls.Add(this.label1);
-      this.ForeColor = System.Drawing.Color.White;
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-      this.MaximizeBox = false;
-      this.MinimizeBox = false;
-      this.Name = "AddCredentials";
-      this.ShowIcon = false;
-      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormDraggable);
-      this.ResumeLayout(false);
-      this.PerformLayout();
-
+      AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+      AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      BackColor = System.Drawing.Color.FromArgb(((int)((byte)17)), ((int)((byte)17)), ((int)((byte)27)));
+      ClientSize = new System.Drawing.Size(264, 154);
+      Controls.Add(btnAddCredentials);
+      Controls.Add(txtPassword);
+      Controls.Add(label5);
+      Controls.Add(txtUsername);
+      Controls.Add(label2);
+      Controls.Add(btnExit);
+      Controls.Add(label1);
+      ForeColor = System.Drawing.Color.White;
+      FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+      MaximizeBox = false;
+      MinimizeBox = false;
+      ShowIcon = false;
+      StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+      MouseDown += FormDraggable;
+      ResumeLayout(false);
+      PerformLayout();
     }
 
     #endregion

@@ -63,12 +63,12 @@ namespace OsuServerLauncher.Controls
 
     public void SelectItem()
     {
-      BackColor = Color.FromArgb(30, 30, 30);
+      BackColor = ColorTranslator.FromHtml("#313244");
     }
 
     public void DeselectItem()
     {
-      BackColor = Color.FromArgb(10, 10, 10);
+      BackColor = ColorTranslator.FromHtml("#1e1e2e");
     }
   }
 }

@@ -15,6 +15,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,6 +27,9 @@ namespace OsuServerLauncher
     public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
     [System.Runtime.InteropServices.DllImport("user32.dll")]
     public static extern bool ReleaseCapture();
+    
+    [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
+    private static extern int SetWindowTheme(IntPtr hWnd, string pszSubAppName, string pszSubIdList);
 
     List<Server> m_servers = new List<Server>() { Server.Official };
     Data m_data = new Data();
@@ -33,14 +37,26 @@ namespace OsuServerLauncher
     HttpListener m_httpListener = new HttpListener();
     string m_osuPath = "";
 
-    string m_appdatafolder = Path.Combine(Environment.GetEnvironmentVariable("localappdata"), "osu! Server Launcher");
-    string m_serverfile = Path.Combine(Environment.GetEnvironmentVariable("localappdata"), "osu! Server Launcher", "servers.json");
-    string m_datafile = Path.Combine(Environment.GetEnvironmentVariable("localappdata"), "osu! Server Launcher", "data.json");
+    string m_appdatafolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+      "osu! Server Launcher");
+    string m_serverfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+      "osu! Server Launcher", "servers.json");
+    string m_datafile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+      "osu! Server Launcher", "data.json");
 
-    string m_streamoverlayserverfile = Path.Combine(Environment.GetEnvironmentVariable("localappdata"), "osu! Server Launcher", "streamoverlay", "server.txt");
-    string m_streamoverlayiconfile = Path.Combine(Environment.GetEnvironmentVariable("localappdata"), "osu! Server Launcher", "streamoverlay", "icon.png");
+    string m_streamoverlayserverfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
+      "osu! Server Launcher", "streamoverlay", "server.txt");
+    string m_streamoverlayiconfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
+      "osu! Server Launcher", "streamoverlay", "icon.png");
 
-    public const string VERSION = "v1.0";
+    public const string VERSION = "20260422";
+    
+    protected override void OnShown(EventArgs e)
+    {
+      base.OnShown(e);
+
+      SetWindowTheme(flowLayoutPanel.Handle, "DarkMode_Explorer", null);
+    }
 
     public MainForm()
     {
@@ -93,7 +109,7 @@ namespace OsuServerLauncher
         File.WriteAllText(m_datafile, JsonConvert.SerializeObject(m_data, Formatting.Indented));
       m_data = JsonConvert.DeserializeObject<Data>(File.ReadAllText(m_datafile));
 
-      m_osuPath = Utils.GetOsuPath();
+      m_osuPath = Utils.GetOsuPath(m_data);
       if (m_osuPath == "")
       {
         m_osuPath = m_data.AlternativeOsuPath;
@@ -140,7 +156,7 @@ namespace OsuServerLauncher
       using (HttpClient client = new HttpClient())
       {
         client.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
-        HttpResponseMessage response = await client.GetAsync("https://api.github.com/repos/minisbett/osu-server-launcher/releases?per_page=1");
+        HttpResponseMessage response = await client.GetAsync("https://api.github.com/repos/ffraljer/osu-server-launcher/releases?per_page=1");
         string[] split = (await response.Content.ReadAsStringAsync()).Split('"');
 
         if (split.Length == 1)
@@ -255,6 +271,10 @@ namespace OsuServerLauncher
     {
       File.WriteAllText(m_streamoverlayserverfile, "");
       File.WriteAllText(m_streamoverlayiconfile, "");
+    }
+
+    private void btnAbout_Click(object sender, EventArgs e) {
+      throw new System.NotImplementedException();
     }
   }
 }

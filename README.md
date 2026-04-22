@@ -1,6 +1,3 @@
-
-<a href="https://discord.gg/9KfUdHpUA8"><img src="https://discordapp.com/api/guilds/715149105525030932/widget.png"></a>
-
 <a href="https://github.com/minisbett/osu-server-launcher"><img width=128 height=128 align="right" src="https://minisbett.github.io/ultimate-osu-server-switcher/images/icon.png"></a>
 
 ## osu! Server Launcher DEPRECATED

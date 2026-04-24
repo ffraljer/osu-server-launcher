@@ -22,7 +22,7 @@ using System.Windows.Forms;
 namespace OsuServerLauncher
 {
     public partial class MainForm : Form {
-        private const string version = "20260424";
+        private const string version = "20260424.1";
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -53,7 +53,7 @@ namespace OsuServerLauncher
         string m_streamoverlayiconfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
           "osu! Server Launcher", "streamoverlay", "icon.png");
 
-        public const string VERSION = "20260422";
+        public const string VERSION = version;
 
         protected override void OnShown(EventArgs e) {
             base.OnShown(e);

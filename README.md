@@ -1,10 +1,6 @@
-<a href="https://github.com/minisbett/osu-server-launcher"><img width=128 height=128 align="right" src="https://minisbett.github.io/ultimate-osu-server-switcher/images/icon.png"></a>
-
-just QoL changes.
-
 ## osu! Server Launcher DEPRECATED
-This is the follow-up to the Ultimate osu! Server Switcher but updated to the new devserver connection method.
+This is a fork of minisbett's [osu! server launcher](https://github.com/ffraljer/osu-server-launcher-old), only with QoL changes.
 
 ## How to use
-To use this program go to [the releases page](https://github.com/MinisBett/osu-server-launcher/releases) and open the assets section of the most recent release.
+To use this program go to [the releases page](https://github.com/ffraljer/osu-server-launcher/releases) and open the assets section of the most recent release.
 Then simply download and run the file named `OsuServerLauncher.exe`.

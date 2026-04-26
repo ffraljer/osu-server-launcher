@@ -16,7 +16,7 @@ namespace OsuServerLauncher.Models
     public string Domain { get; private set; }
 
     [JsonProperty("credentials")]
-    public Credentials Credentials { get; set; }
+    public ServerInfo Credentials { get; set; }
 
     [JsonIgnore]
     public bool IsOfficial => Domain == Official.Domain;

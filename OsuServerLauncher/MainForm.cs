@@ -22,7 +22,7 @@ using System.Windows.Forms;
 namespace OsuServerLauncher
 {
     public partial class MainForm : Form {
-        private const string version = "20260424.1";
+        private const string version = "20260426";
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
@@ -67,6 +67,7 @@ namespace OsuServerLauncher
             tip.SetToolTip(button1, "play anonymously");
             pnlLauncher.Show();
             pnlAbout.Hide();
+            label5.Text = VERSION;
         }
 
         private void btnExit_Click(object sender, EventArgs e) => Application.Exit();
@@ -165,6 +166,7 @@ namespace OsuServerLauncher
                 item.Click += ServerItemClick;
                 item.DoubleClick += ServerItemDoubleClick;
                 item.ShowLock = server.Credentials != null;
+                item.RightClick += ServerItemRightClick;
                 flowLayoutPanel.Controls.Add(item);
             }
         }
@@ -192,7 +194,12 @@ namespace OsuServerLauncher
                 File.WriteAllText(Path.Combine(m_osuPath, $"osu!.{Environment.UserName}.cfg"), configfile);
             }
 
-            Process.Start(Path.Combine(m_osuPath, "osu!.exe"), server.IsOfficial ? "" : $"-devserver {server.Domain}");
+            string clientExe = server.Credentials?.ClientLocation != null && 
+                File.Exists(server.Credentials.ClientLocation)
+                ? server.Credentials.ClientLocation
+                : Path.Combine(m_osuPath, "osu!.exe");
+
+            Process.Start(clientExe, server.IsOfficial ? "" : $"-devserver {server.Domain}");
 
             File.WriteAllText(m_streamoverlayserverfile, server.Name);
             if (sender.Icon != null)
@@ -256,10 +263,6 @@ namespace OsuServerLauncher
             throw new System.NotImplementedException();
         }
 
-        private void label5_Click(object sender, EventArgs e) {
-
-        }
-
         private void button1_Click(object sender, EventArgs e) {
             try {
                 string path = Path.Combine(m_osuPath, $"osu!.{Environment.UserName}.cfg");
@@ -269,7 +272,7 @@ namespace OsuServerLauncher
 
                 for (int i = 0; i < lines.Length; i++) {
                     if (lines[i].StartsWith("Username ="))
-                        lines[i] = "Username =";
+                        lines[i] = $"Username = {Environment.UserName}"; // placeholder
 
                     if (lines[i].StartsWith("Password ="))
                         lines[i] = "Password =";
@@ -282,6 +285,39 @@ namespace OsuServerLauncher
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ServerItemRightClick(ServerItem sender) {
+            m_selectedServerItem?.DeselectItem();
+            sender.SelectItem();
+            m_selectedServerItem = sender;
+
+            ContextMenuStrip menu = new ContextMenuStrip();
+            menu.Renderer = new ToolStripProfessionalRenderer(new DarkColourTable());
+            menu.ForeColor = Color.White;
+            menu.Items.Add("Edit Server", null, (s, e) => {
+                AddServer edit = new AddServer(sender.Server);
+                edit.ShowDialog();
+                if (edit.Server != null) {
+                    int index = m_servers.IndexOf(sender.Server);
+                    m_servers[index] = edit.Server;
+                    File.WriteAllText(m_serverfile, JsonConvert.SerializeObject(m_servers, Formatting.Indented));
+                    UpdateServerList();
+                }
+            });
+            menu.Items.Add("Edit Server Credentials", null, (s, e) => {
+                AddCredentials edit = sender.Server.Credentials != null
+                    ? new AddCredentials(sender.Server.Credentials)
+                    : new AddCredentials();
+                edit.ShowDialog();
+                if (edit.Credentials != null) {
+                    int index = m_servers.IndexOf(sender.Server);
+                    m_servers[index].Credentials = edit.Credentials;
+                    File.WriteAllText(m_serverfile, JsonConvert.SerializeObject(m_servers, Formatting.Indented));
+                    UpdateServerList();
+                }
+            });
+            menu.Show(Cursor.Position);
         }
     }
 }

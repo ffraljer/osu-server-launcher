@@ -13,59 +13,54 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OsuServerLauncher.Controls
-{
-  public partial class AddCredentials : Form
-  {
-    [DllImport("user32.dll")]
-    public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-    [DllImport("user32.dll")]
-    public static extern bool ReleaseCapture();
+namespace OsuServerLauncher.Controls {
+    public partial class AddCredentials : Form {
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
 
-    public Credentials Credentials { get; private set; }
+        public ServerInfo Credentials { get; private set; }
 
-    public AddCredentials()
-    {
-      InitializeComponent();
+        public AddCredentials() {
+            InitializeComponent();
+        }
+
+        public AddCredentials(ServerInfo credentials) : this() {
+            txtUsername.Text = credentials.Username;
+            txtPassword.PlaceholderText = "Leave blank to keep current password";
+        }
+
+        private void btnExit_Click(object sender, EventArgs e) => Close();
+
+        private void FormDraggable(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Left) {
+                ReleaseCapture();
+                SendMessage(Handle, 0xA1, 0x2, 0);
+            }
+        }
+
+        protected override CreateParams CreateParams {
+            get {
+                CreateParams cp = base.CreateParams;
+                cp.ClassStyle |= 0x20000;
+                return cp;
+            }
+        }
+
+        private void btnAddServer_Click(object sender, EventArgs e) {
+            string password = DPAPI.Encrypt(DPAPI.KeyType.UserKey, txtPassword.Text, "cu24180ncjeiu0ci1nwui", "Raw");
+            Credentials = new ServerInfo(txtUsername.Text, password);
+            Close();
+        }
+
+        private void txt_TextChanged(object sender, EventArgs e) {
+            btnAddCredentials.Enabled = txtUsername.TextLength > 0 && txtPassword.TextLength > 0;
+        }
+
+        private void txt_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter)
+                btnAddCredentials.PerformClick();
+        }
     }
-
-    private void btnExit_Click(object sender, EventArgs e) => Close();
-
-    private void FormDraggable(object sender, MouseEventArgs e)
-    {
-      if (e.Button == MouseButtons.Left)
-      {
-        ReleaseCapture();
-        SendMessage(Handle, 0xA1, 0x2, 0);
-      }
-    }
-
-    protected override CreateParams CreateParams
-    {
-      get
-      {
-        CreateParams cp = base.CreateParams;
-        cp.ClassStyle |= 0x20000;
-        return cp;
-      }
-    }
-
-    private void btnAddServer_Click(object sender, EventArgs e)
-    {
-      string password = DPAPI.Encrypt(DPAPI.KeyType.UserKey, txtPassword.Text, "cu24180ncjeiu0ci1nwui", "Raw");
-      Credentials = new Credentials(txtUsername.Text, password);
-      Close();
-    }
-
-    private void txt_TextChanged(object sender, EventArgs e)
-    {
-      btnAddCredentials.Enabled = txtUsername.TextLength > 0 && txtPassword.TextLength > 0;
-    }
-
-    private void txt_KeyDown(object sender, KeyEventArgs e)
-    {
-      if (e.KeyCode == Keys.Enter)
-        btnAddCredentials.PerformClick();
-    }
-  }
 }

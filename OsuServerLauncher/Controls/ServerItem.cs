@@ -11,64 +11,62 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OsuServerLauncher.Controls
-{
-  public partial class ServerItem : UserControl
-  {
+namespace OsuServerLauncher.Controls {
+    public partial class ServerItem : UserControl {
 
-    public static Dictionary<string, Image> IconCache { get; } = new Dictionary<string, Image>();
+        public static Dictionary<string, Image> IconCache { get; } = new Dictionary<string, Image>();
 
-    public Server Server { get; }
+        public Server Server { get; }
 
-    public bool ShowLock { set => pictureLock.Visible = value; }
+        public new event ClickHandler RightClick;
 
-    public Image Icon => pictureIcon.Image;
+        public bool ShowLock { set => pictureLock.Visible = value; }
 
-    public delegate void ClickHandler(ServerItem sender);
-    public new event ClickHandler Click;
-    public new event ClickHandler DoubleClick;
+        public Image Icon => pictureIcon.Image;
 
-    public ServerItem(Server server)
-    {
-      InitializeComponent();
+        public delegate void ClickHandler(ServerItem sender);
+        public new event ClickHandler Click;
+        public new event ClickHandler DoubleClick;
 
-      Server = server;
-      lblName.Text = server.Name;
-      SynchronizationContext context = SynchronizationContext.Current;
-      if (IconCache.ContainsKey(server.Domain))
-        pictureIcon.Image = IconCache[server.Domain];
-      else
-      {
-        Task.Run(() =>
-        {
-          Image img = Utils.GetServerIcon(Server.Domain);
-          if (img != null)
-          {
-            context.Post(_ => pictureIcon.Image = img, null);
-            IconCache.Add(Server.Domain, img);
-          }
-        });
-      }
+        public ServerItem(Server server) {
+            InitializeComponent();
 
-      base.Click += (sender, e) => Click?.Invoke(this);
-      base.DoubleClick += (sender, e) => DoubleClick?.Invoke(this);
-      foreach(Control c in Controls)
-      {
-        c.Click += (sender, e) => Click?.Invoke(this);
-        c.DoubleClick += (sender, e) => DoubleClick?.Invoke(this);
-      }
+            Server = server;
+            lblName.Text = server.Name;
+            SynchronizationContext context = SynchronizationContext.Current;
+            if (IconCache.ContainsKey(server.Domain))
+                pictureIcon.Image = IconCache[server.Domain];
+            else {
+                Task.Run(() =>
+                {
+                    Image img = Utils.GetServerIcon(Server.Domain);
+                    if (img != null) {
+                        context.Post(_ => pictureIcon.Image = img, null);
+                        IconCache.Add(Server.Domain, img);
+                    }
+                });
+            }
 
-      pictureLock.Parent = pictureIcon;
+            base.Click += (sender, e) => Click?.Invoke(this);
+            base.DoubleClick += (sender, e) => DoubleClick?.Invoke(this);
+            foreach (Control c in Controls) {
+                c.Click += (sender, e) => Click?.Invoke(this);
+                c.DoubleClick += (sender, e) => DoubleClick?.Invoke(this);
+            }
+
+            base.MouseClick += (sender, e) => { if (e.Button == MouseButtons.Right) RightClick?.Invoke(this); };
+            foreach (Control c in Controls)
+                c.MouseClick += (sender, e) => { if (e.Button == MouseButtons.Right) RightClick?.Invoke(this); };
+
+            pictureLock.Parent = pictureIcon;
+        }
+
+        public void SelectItem() {
+            BackColor = ColorTranslator.FromHtml("#313244");
+        }
+
+        public void DeselectItem() {
+            BackColor = ColorTranslator.FromHtml("#1e1e2e");
+        }
     }
-
-    public void SelectItem()
-    {
-      BackColor = ColorTranslator.FromHtml("#313244");
-    }
-
-    public void DeselectItem()
-    {
-      BackColor = ColorTranslator.FromHtml("#1e1e2e");
-    }
-  }
 }

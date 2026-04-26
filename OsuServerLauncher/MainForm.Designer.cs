@@ -291,7 +291,6 @@ namespace OsuServerLauncher
             label5.TabIndex = 5;
             label5.Text = "20260424";
             label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            label5.Click += label5_Click;
             // 
             // button1
             // 
